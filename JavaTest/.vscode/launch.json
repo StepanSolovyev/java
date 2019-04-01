@@ -2,10 +2,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "CodeLens (Launch) - App",
+            "name": "CodeLens (Launch) - AppEntryExample",
             "request": "launch",
-            "mainClass": "app.App",
-            "projectName": "JavaTest"
+            "mainClass": "MyNamespace.AppEntryExample",
+            "projectName": "JavaTest",
+            "args": "C:\\\\Users\\\\Administrator\\\\Desktop\\\\convertFile.txt"
         }
     ]
 }
