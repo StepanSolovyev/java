@@ -2,6 +2,9 @@ package MyNamespace;
 
 import java.io.IOError;
 import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 // default print form
 class PrintForm{
@@ -85,7 +88,7 @@ class PrintForm{
            
            "\\f3 \\",
            "",
-           "\\f2 \\uc0\\u1054 \\u1090 \\u1074 \\u1077 \\u1090 \\u1089 \\u1090 \\u1074 \\u1077 \\u1085 \\u1085 \\u1099 \\u1081  \\u1079 \\u1072  \\u1087 \\u1088 \\u1086 \\u1074 \\u1077 \\u1076 \\u1077 \\u1085 \\u1080 \\u1077  \\uc0\\u1087 \\u1088 \\u1072 \\u1082 \\u1090 \\u1080 \\u1082 \\u1080   \\u1086 \\u1090  \\u1091 \\u1085 \\u1080 \\u1074 \\u1077 \\u1088 \\u1089 \\u1080 \\u1090 \\u1077 \\u1090 \\u1072  x8x",
+           "\\f2 \\uc0\\u1054 \\u1090 \\u1074 \\u1077 \\u1090 \\u1089 \\u1090 \\u1074 \\u1077 \\u1085 \\u1085 \\u1099 \\u1081  \\u1079 \\u1072  \\u1087 \\u1088 \\u1086 \\u1074 \\u1077 \\u1076 \\u1077 \\u1085 \\u1080 \\u1077  \\uc0\\u1087 \\u1088 \\u1072 \\u1082 \\u1090 \\u1080 \\u1082 \\u1080   \\u1086 \\u1090  \\u1091 \\u1085 \\u1080 \\u1074 \\u1077 \\u1088 \\u1089 \\u1080 \\u1090 \\u1077 \\u1090 \\u1072  x9x",
            "\\f3 \\",
            "",
            "\\f2    ",
@@ -1071,5 +1074,44 @@ class PrintForm{
            "}"
 
     };
-    
+    public void Write(String FileName)throws IOException {
+
+    BufferedWriter bw = null;
+		FileWriter fw = null;
+
+		try {
+
+            String content = "";
+            for (String str : this.DefaultPrintForm) {
+                content += str;
+            }
+            
+
+			fw = new FileWriter(FileName);
+			bw = new BufferedWriter(fw);
+			bw.write(content);
+
+			System.out.println("Done");
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (bw != null)
+					bw.close();
+
+				if (fw != null)
+					fw.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+    }
+    }
 }
