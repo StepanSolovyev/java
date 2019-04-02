@@ -13,4 +13,17 @@ Date SignDate;
 
 //table data
 RecordTable tabledata;
+
+public void WriteToRTF(Record[] list, String PathToFile) throws Exception{
+    for (Record rec : list) {
+        
+        // create new print form to fill
+        PrintForm form = new PrintForm();
+        
+    
+    
+        
+    }
+    
+        }
 }

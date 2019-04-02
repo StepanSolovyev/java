@@ -40,6 +40,7 @@ public class TxtToRtfParser {
     // write result to file
     private void WriteResult(Record []records)    throws Exception {}
     
+    
     // get and set environment vars; validate application args
     public void Init(String[] args)throws Exception {
         _envosarch = System.getProperty("os.arch");
