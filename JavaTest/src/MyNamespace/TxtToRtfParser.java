@@ -1,6 +1,8 @@
-package MyNamespace;
+ppackage MyNamespace;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TxtToRtfParser {
     // environment data
@@ -29,7 +31,23 @@ public class TxtToRtfParser {
     int _ConsoleInputArgsMAX = 5;
 
     // if input file txt formatted
-    private void ParseTXTFile(String Filepath)         throws Exception {}
+    private Record[] ParseTXTFile(String Filepath)         throws Exception {
+        Record[] arraytoreturn = new Record[255];
+
+              // arraytoreturn[0].PeriodStart = 
+        // List<String> output = new ArrayList<>();
+        // try (BufferedReader br = new BufferedReader(new FileReader(Filepath))) {
+        //     String sCurrentLine;
+        //     while ((sCurrentLine = br.readLine()) != null) {
+        //         output.add(sCurrentLine);
+        //     }
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
+
+
+        return arraytoreturn;
+    }
 
     // if input file word formatted
     private void ParseWordFile(String Filepath)        throws Exception {}
@@ -81,7 +99,8 @@ public class TxtToRtfParser {
             // test path
             File tmpDir = new File(args[0]);
             boolean exists = (tmpDir.exists() && !tmpDir.isDirectory());
-
+            List<String> list = ParseTXTFile(args[0]);
+            new Record().WriteToRTF(list.toArray(), args[0]);
 
             // run parser
 
