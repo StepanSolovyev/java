@@ -3,13 +3,13 @@ import java.sql.Date;
 
 class Record{
     //basic
-Date PeriodStart;
-Date PeriodEnd;
-String FirstName, LastName, SurName;
-String Faculty, Department, Specialty, Group;
-String Location;
-String Chief, ResponsiblePerson;
-Date SignDate;
+    public String PeriodStart;
+    public String PeriodEnd;
+    public String FirstName, LastName, SurName;
+    public String Faculty, Department, Specialty, Group;
+    public String Location;
+    public String OrganizationResponsiblePerson, UniversityResponsiblePerson;
+    public String SignDate;
 
 //table data
 RecordTable tabledata;
@@ -41,10 +41,10 @@ public void WriteToRTF(Record[] list,String PathToFile) throws Exception{
                 str.replace("x7x", "\\'3f }{\\cf1\\ul\\ulc0\\b0\\rtlch \\ltrch\\loch\\fs24\\loch\\f7\\hich\\af7 \n\r"+rec.Location+"}");
             }
             if(str.contains("x8x")){
-                str.replace("x8x", "\\'3f }{\\cf1\\ul\\ulc0\\b0\\rtlch \\ltrch\\loch\\fs24\\loch\\f7\\hich\\af7 \n\r"+rec.Chief+"}");
+                str.replace("x8x", "\\'3f }{\\cf1\\ul\\ulc0\\b0\\rtlch \\ltrch\\loch\\fs24\\loch\\f7\\hich\\af7 \n\r"+rec.OrganizationResponsiblePerson+"}");
             }
             if(str.contains("x9x")){
-                str.replace("x9x", "\\'3f }{\\cf1\\ul\\ulc0\\b0\\rtlch \\ltrch\\loch\\fs24\\loch\\f7\\hich\\af7 \n\r"+rec.ResponsiblePerson+"}");
+                str.replace("x9x", "\\'3f }{\\cf1\\ul\\ulc0\\b0\\rtlch \\ltrch\\loch\\fs24\\loch\\f7\\hich\\af7 \n\r"+rec.UniversityResponsiblePerson+"}");
             }
 
             form.Write(PathToFile);

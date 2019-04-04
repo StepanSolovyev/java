@@ -1,0 +1,2 @@
+01.01.1987 01.01.2019 Mishkin Miskhail Mikhailovich DepartmentName Group-33333 Speciality Location OrgRespPerson UniversityRespPerson 12.12.1987
+01.01.1987 01.01.2019 Мишкин Михаил Михайлович ИмяДепартамента НомерГруппы-33333 Специалитет МестоПроведения ОтветственныйНаОрганизации ОтветсвтенныйВУниверситете 12.12.1987

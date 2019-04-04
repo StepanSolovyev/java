@@ -1,8 +1,10 @@
-ppackage MyNamespace;
+package MyNamespace;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.processing.FilerException;
 
 public class TxtToRtfParser {
     // environment data
@@ -30,24 +32,56 @@ public class TxtToRtfParser {
     // maximum args value during console input
     int _ConsoleInputArgsMAX = 5;
 
+    Record[] ParsedRecords;
+
     // if input file txt formatted
     private Record[] ParseTXTFile(String Filepath)         throws Exception {
-        Record[] arraytoreturn = new Record[255];
+        
+        // file read preparation        
+        File file = new File(Filepath); 
+        BufferedReader br = new BufferedReader(new FileReader(file)); 
+        
+        // 
+        String st, FullFileAsString = ""; 
+        while ((st = br.readLine()) != null) {
+        FullFileAsString += (st+_envoslserparator);
+        } 
+        
+        String[] FileRecord = FullFileAsString.split(_envoslserparator);
+        int arraylength = FileRecord.length;
+        
+        // both arrays have same length
+        Record[]  arraytoreturn = new Record[arraylength];
+        for(int i = 0; i < arraytoreturn.length ; i++)
+{
+    arraytoreturn[i] = new Record();
+}
+        
+        // parse strings one by one 
+        // also define file struct
+        for(int currentindex = 0;currentindex <arraylength;currentindex++){
+            arraytoreturn[currentindex].PeriodStart         = FileRecord[currentindex].split(" ")[0];
+            arraytoreturn[currentindex].PeriodEnd           = FileRecord[currentindex].split(" ")[1];
+            
+            arraytoreturn[currentindex].FirstName           = FileRecord[currentindex].split(" ")[2];
+            arraytoreturn[currentindex].LastName            = FileRecord[currentindex].split(" ")[3];
+            arraytoreturn[currentindex].SurName             = FileRecord[currentindex].split(" ")[4];
+            
+            arraytoreturn[currentindex].Department          = FileRecord[currentindex].split(" ")[5];
+            arraytoreturn[currentindex].Group               = FileRecord[currentindex].split(" ")[6];
 
-              // arraytoreturn[0].PeriodStart = 
-        // List<String> output = new ArrayList<>();
-        // try (BufferedReader br = new BufferedReader(new FileReader(Filepath))) {
-        //     String sCurrentLine;
-        //     while ((sCurrentLine = br.readLine()) != null) {
-        //         output.add(sCurrentLine);
-        //     }
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
+            arraytoreturn[currentindex].Specialty           = FileRecord[currentindex].split(" ")[7];
+            
+            arraytoreturn[currentindex].Location            = FileRecord[currentindex].split(" ")[8];
+
+            arraytoreturn[currentindex].OrganizationResponsiblePerson = FileRecord[currentindex].split(" ")[9];
+            arraytoreturn[currentindex].UniversityResponsiblePerson   = FileRecord[currentindex].split(" ")[10];
+            arraytoreturn[currentindex].SignDate            = FileRecord[currentindex].split(" ")[11];
+        }
 
 
         return arraytoreturn;
-    }
+}
 
     // if input file word formatted
     private void ParseWordFile(String Filepath)        throws Exception {}
@@ -62,7 +96,7 @@ public class TxtToRtfParser {
     // get and set environment vars; validate application args
     public void Init(String[] args)throws Exception {
         _envosarch = System.getProperty("os.arch");
-        _envosname = System.getProperty("os.name");
+        _envosname = System.getProperty("os.name").toLowerCase();
         _envosversion = System.getProperty("os.version");
 
         _envospseparator = System.getProperty("path.separator");
@@ -79,8 +113,10 @@ public class TxtToRtfParser {
     if (args.length > 1 && args.length < _ConsoleInputArgsMAX) {
         _isConsoleInput = true; return;
 
-    } else{
+    }
+
         
+        {
         if (args[0].split("\\.")[1].equals("rtf")){
             _isRTFInput = true;
         }
@@ -91,7 +127,7 @@ public class TxtToRtfParser {
         // if validation failed - throw exception
         if (!(_isRTFInput || _isConsoleInput || _isTXTInput)){
         throw new IllegalArgumentException("incoming arguments validation failed");}
-        
+    
         // args validation step 2: validate args data by type
 
         // txt - check if file exists and parsable
@@ -99,11 +135,9 @@ public class TxtToRtfParser {
             // test path
             File tmpDir = new File(args[0]);
             boolean exists = (tmpDir.exists() && !tmpDir.isDirectory());
-            List<String> list = ParseTXTFile(args[0]);
-            new Record().WriteToRTF(list.toArray(), args[0]);
-
+            
             // run parser
-
+            this.ParsedRecords =  this.ParseTXTFile(args[0]);
             // run writer
         }
 

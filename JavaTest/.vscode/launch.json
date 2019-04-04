@@ -6,7 +6,7 @@
             "request": "launch",
             "mainClass": "MyNamespace.AppEntryExample",
             "projectName": "JavaTest",
-            "args": "C:\\\\Users\\\\Administrator\\\\Desktop\\\\convertFile.txt"
+            "args": "/home/ssolovyev/Documents/dev/java/JavaTest/src/FileToParse.txt"
         }
     ]
 }
